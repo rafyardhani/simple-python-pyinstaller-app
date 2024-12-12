@@ -18,7 +18,6 @@ pipeline {
                     docker.image(env.DOCKER_IMAGE_BUILD).inside {
                         sh '''
                         set -e
-                        echo "Compiling Python source files..."
                         python -m py_compile sources/add2vals.py sources/calc.py
                         '''
                     }
@@ -32,7 +31,6 @@ pipeline {
                     docker.image(env.DOCKER_IMAGE_TEST).inside {
                         sh '''
                         set -e
-                        echo "Executing pytest..."
                         py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py
                         '''
                     }
