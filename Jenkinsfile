@@ -3,7 +3,6 @@ pipeline {
     environment {
         DOCKER_IMAGE_BUILD = 'python:2-alpine'
         DOCKER_IMAGE_TEST = 'qnib/pytest'
-        DOCKER_IMAGE_DEPLOY = 'python:2-slim'
     }
     stages {
         stage('Checkout') {
