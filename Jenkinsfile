@@ -32,4 +32,17 @@ node {
         }
     } catch (Exception e) {
         currentBuild.result = 'FAILURE'
-        echo "Pipeline failed: ${e.getMessage()
+        echo "Pipeline failed: ${e.getMessage()}"
+    } finally {
+        stage('Cleanup') {
+            echo 'Cleaning up workspace...'
+            cleanWs()
+        }
+
+        if (currentBuild.result == 'SUCCESS') {
+            echo 'Pipeline completed successfully!'
+        } else {
+            echo 'Pipeline failed! Check logs for more details.'
+        }
+    }
+}
