@@ -30,6 +30,10 @@ node {
             echo 'Publishing test results...'
             junit 'test-reports/results.xml'
         }
+        
+        stage('Manual Approval') {
+            input "Lanjutkan ke tahap Deploy?"
+        }
     } catch (Exception e) {
         currentBuild.result = 'FAILURE'
         echo "Pipeline failed: ${e.getMessage()}"
