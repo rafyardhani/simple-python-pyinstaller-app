@@ -47,41 +47,7 @@ node {
         '''
     }
 
-    echo "Archiving built artifact..."
     sleep(60)
-    archiveArtifacts artifacts: 'dist/add2vals', onlyIfSuccessful: true
-
-    echo "Copying artifact to remote server..."
-    sshPublisher(publishers: [
-        sshPublisherDesc(configName: 'deployment-server', transfers: [
-            sshTransfer(
-                cleanRemote: false, 
-                excludes: '', 
-                execCommand: '', 
-                execTimeout: 120000, 
-                flatten: false, 
-                makeEmptyDirs: true, 
-                remoteDirectory: 'master', 
-                remoteDirectorySDF: false, 
-                removePrefix: '', 
-                sourceFiles: 'dist/add2vals'
-            ),
-            sshTransfer(
-                cleanRemote: false, 
-                excludes: '', 
-                execCommand: '''
-                    cd /home/simple-python-pyinstaller-app/dist && chmod +x add2vals && ./add2vals 2 5
-                ''', 
-                execTimeout: 120000, 
-                flatten: false, 
-                makeEmptyDirs: false, 
-                remoteDirectory: '', 
-                remoteDirectorySDF: false, 
-                removePrefix: '', 
-                sourceFiles: ''
-            )
-        ], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)
-    ])
 }
 
     } catch (Exception e) {
