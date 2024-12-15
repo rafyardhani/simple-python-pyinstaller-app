@@ -34,8 +34,8 @@ node {
         stage('Manual Approval') {
             input "Lanjutkan ke tahap Deploy?"
         }
-        stage('Deploy') {
-    docker.image('python:3-slim').inside('-u root') {
+    stage('Deploy') {
+        docker.image('python:3-slim').inside('-u root') {
         sh '''
         echo "Installing PyInstaller and dependencies..."
         apt-get update && apt-get install -y build-essential libffi-dev \
